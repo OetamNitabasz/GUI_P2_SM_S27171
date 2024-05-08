@@ -1,13 +1,17 @@
 package Projekt;
 
+//1. lublin null. Ma wypisac dystans i cena
+//2. Wyliczyc koszt w Cena.
+//3. Koszt odpowiednio wypisac.
+
 public class CarshareTest {
     static final int ZABYTKOWY = 1;
     static final int OSOBOWY = 2;
     static final int DOSTAWCZY = 3;
     static final int DARMO = 4;
-   // static int cena(Koszyk k, String markaSamochodu){
-
-    //}
+   /* static int cena(Koszyk k, String markaSamochodu){
+    }
+    */
 
     public static void main(String[] args) {
         Cennik cennik = Cennik.pobierzCennik();
@@ -32,6 +36,16 @@ public class CarshareTest {
         ListaZyczen listaF1 = f1.pobierzListeZyczen();
 
         System.out.println("Lista życzeń klienta " + listaF1);
+
+        Koszyk koszykF1 = f1.pobierzKoszyk();
+        f1.przepakuj();
+
+        // Co jest na liście życzeń klienta f1
+        System.out.println("Po przepakowaniu, lista życzeń klienta " + f1.pobierzListeZyczen());
+
+        // Co jest w koszyku klienta f1
+        System.out.println("Po przepakowaniu, koszyk klienta " + koszykF1);
     }
 }
+
 

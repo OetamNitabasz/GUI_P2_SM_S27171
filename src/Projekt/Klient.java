@@ -1,27 +1,44 @@
 package Projekt;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Klient {
-    private String id;
+    private String nazwaKlienta;
     private double budzet;
     private boolean abonament;
+    private Koszyk koszyk;
+    //private List<Cena> ceny = new ArrayList<>();
 
-    public Klient(String id, double budzet, boolean abonament) {
-        this.id = id;
+    public Klient(String nazwaKlienta, double budzet, boolean abonament) {
+        this.nazwaKlienta = nazwaKlienta;
         this.budzet = budzet;
         this.abonament = abonament;
+        koszyk = new Koszyk(this);
     }
-    ListaZyczen listaZyczen = new ListaZyczen();
+
+    ListaZyczen listaZyczen = new ListaZyczen(this);
+
+
     public void dodaj(Samochod samochod) {
         listaZyczen.dodaj(samochod);
-                                    // nie dodawac dwa razy tych samych samochodow?
+        // nie dodawac dwa razy tych samych samochodow?
     }
+
     public ListaZyczen pobierzListeZyczen() {
         return listaZyczen;
     }
-    public String getId() {
-        return id;
+
+    public String getNazwaKlienta() {
+        return nazwaKlienta;
+    }
+
+    public Koszyk pobierzKoszyk() {
+        return koszyk;
+    }
+
+    public Koszyk przepakuj() {
+        koszyk.przepakuj(listaZyczen);
+        return koszyk;
+    }
+    public boolean czyAbonamentowy() {
+        return abonament;
     }
 }

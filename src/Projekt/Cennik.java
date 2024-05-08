@@ -1,11 +1,14 @@
 package Projekt;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class Cennik {
 
     private static Cennik cennik;
+
 
     private Cennik() {
 
@@ -19,11 +22,21 @@ public class Cennik {
         return cennik;
     }
 
-    List<Cena> pozycje = new ArrayList<>();
+    private List<Cena> pozycje = new ArrayList<>();
+    Cena cena(Samochod samochod) {
+         var pierwszy = pozycje.stream()
+                .filter(c -> c.rodzaj == samochod.getRodzaj() && c.nazwa.equals(samochod.getNazwaSamochodu()))
+                .findFirst()
+                .orElse(null);
+         return pierwszy;
+
+    }
+
+
      public void dodaj(int rodzaj, String nazwa, double cena) {
         dodaj(new Cena(rodzaj, nazwa, cena));
     }
-    public void dodaj(int rodzaj, String nazwa, double cenaPrzedProgiem, double cenaZaProgiem, int progKilometrow) {
+    public void dodaj(int rodzaj, String nazwa, double cenaZaProgiem, double cenaPrzedProgiem, int progKilometrow) {
         // czemu robimy konstruktory a nie metodami zmieniamy cene
         dodaj(new Cena(rodzaj, nazwa, cenaPrzedProgiem, cenaZaProgiem, progKilometrow));
 
@@ -47,7 +60,15 @@ public class Cennik {
 
         pozycje.add(cena);
     }
-
+   /* public Cennik getCennik() {
+        return (Cennik) pozycje.stream()
+                 .collect(Collectors.toList());
+    }
+    */
+    /*public List<Cena> ceny() {
+        return pozycje.stream()
+                .collect(Collectors.toList());
+    }
+     */
     // cennik mozna modyfikowac w dowolnym momemncie
-
 }

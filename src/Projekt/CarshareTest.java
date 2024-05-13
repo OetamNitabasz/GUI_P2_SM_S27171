@@ -3,15 +3,21 @@ package Projekt;
 //1. lublin null. Ma wypisac dystans i cena
 //2. Wyliczyc koszt w Cena.
 //3. Koszt odpowiednio wypisac.
+import static Projekt.SposobPlatnosci.*;
 
 public class CarshareTest {
     static final int ZABYTKOWY = 1;
     static final int OSOBOWY = 2;
     static final int DOSTAWCZY = 3;
     static final int DARMO = 4;
-   /* static int cena(Koszyk k, String markaSamochodu){
+    static double cena(Koszyk k, String markaSamochodu){
+       var wartosc = k.getZawartosc()
+                .stream()
+                .filter(s -> s.getNazwaSamochodu() == markaSamochodu)
+                .map(s -> s.getKoszt().getCena())
+                .reduce(0.0, Double::sum);
+       return wartosc;
     }
-    */
 
     public static void main(String[] args) {
         Cennik cennik = Cennik.pobierzCennik();
@@ -45,6 +51,22 @@ public class CarshareTest {
 
         // Co jest w koszyku klienta f1
         System.out.println("Po przepakowaniu, koszyk klienta " + koszykF1);
+
+        // Ile wynosi cena wszystkich samochodów typu osobowego w koszyku klienta f1
+        System.out.println("Samochody Syrena w koszyku klienta f1 kosztowały:  " + cena(koszykF1, "Syrena"));
+
+        // Klient zapłaci...
+        f1.zaplac(KARTA);	// płaci kartą płatniczą, prowizja 1%
+
+        // Ile klientowi f1 zostało pieniędzy?
+        System.out.println("Po zapłaceniu, klientowi f1 zostało: " + f1.pobierzPortfel() + " zł");
+
+        // Mogło klientowi zabraknąć srodków, wtedy, opcjonalnie, samochody/kilometry mogą być odkładane,
+        // w przeciwnym przypadku, koszyk jest pusty po zapłaceniu
+        System.out.println("Po zapłaceniu, koszyk klienta " + f1.pobierzKoszyk());
+        System.out.println("Po zapłaceniu, koszyk klienta " + koszykF1);
+
+
     }
 }
 

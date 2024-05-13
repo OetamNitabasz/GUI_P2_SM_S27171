@@ -7,9 +7,18 @@ public class ListaZyczen {
     private List<Samochod> lista = new ArrayList<>();
     private Klient klient;
 
+
     public ListaZyczen(Klient klient) {
         this.klient = klient;
     }
+
+    /*public void przepakuj(Koszyk koszyk) {
+        lista.stream()
+                .filter(s -> s.getKoszt() != null)
+                .forEach(s -> koszyk.);
+    }
+     */
+
 
     void dodaj(Samochod samochod) {
         lista.add(samochod);
@@ -26,6 +35,8 @@ public class ListaZyczen {
     public List<Samochod> getListaZyczen() {
         return lista;
     }
+
+
 
     public String toString() {
         var wynik = new StringBuilder();

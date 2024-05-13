@@ -1,16 +1,15 @@
 package Projekt;
 
-import java.util.ArrayList;
-import java.util.List;
-
 interface IKosztPrzejazdu {
-
+    double getCena();
+    void zaplacone();
 }
 class KosztPrzejazdu implements IKosztPrzejazdu {
     private int dystans = -1;
-    int progKilometrow = -1;
-    double cenaZaProgiem = -1;
-    double cena = 0;
+    private int progKilometrow = -1;
+    private double cenaZaProgiem = -1;
+    private double cena = 0;
+    private boolean zaplacony = false;
 
 
     public KosztPrzejazdu(int dystans, double cenaPrzedProgiem, int progKilometrow, double cenaZaProgiem) {
@@ -18,7 +17,6 @@ class KosztPrzejazdu implements IKosztPrzejazdu {
         this.cena = cenaPrzedProgiem;
         this.progKilometrow = progKilometrow;
         this.cenaZaProgiem = cenaZaProgiem;
-
     }
 
     public KosztPrzejazdu(int dystans, double cena) {
@@ -30,12 +28,22 @@ class KosztPrzejazdu implements IKosztPrzejazdu {
         this.dystans = dystans;
     }
 
-    /*public IKosztPrzejazdu kosztPrzejazdu(List<Cena> pozycja) {
-        if(pozycja.indexOf(4) == 0) {
-            return ;
+    public double getCena() {
+        var wartosc = dystans * cena;
+        if(progKilometrow > -1) {
+            if(dystans < progKilometrow) {
+                return wartosc;
+            }
+            wartosc = progKilometrow * cena;
+            wartosc += (dystans - progKilometrow) * cenaZaProgiem;
         }
+        return wartosc;
+        //zoptyamiluzj kod
     }
-     */
+
+    public void zaplacone() {
+        zaplacony = true;
+    }
 
     public String toString() {
         var wynik = new StringBuilder();

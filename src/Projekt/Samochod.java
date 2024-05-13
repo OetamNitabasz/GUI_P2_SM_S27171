@@ -42,4 +42,8 @@ abstract class Samochod {
         this.koszt = koszt;
     }
 
+    public IKosztPrzejazdu getKoszt() {
+        return koszt;
+    }
+
 }

@@ -1,17 +1,27 @@
 package Projekt;
 
+import java.util.ArrayList;
+import java.util.List;
+
+enum SposobPlatnosci {
+    KARTA,
+    PRZELEW
+}
+
 public class Klient {
     private String nazwaKlienta;
-    private double budzet;
     private boolean abonament;
     private Koszyk koszyk;
-    //private List<Cena> ceny = new ArrayList<>();
+    private Cennik cennik;
+    private Portfel portfel;
+
 
     public Klient(String nazwaKlienta, double budzet, boolean abonament) {
         this.nazwaKlienta = nazwaKlienta;
-        this.budzet = budzet;
         this.abonament = abonament;
         koszyk = new Koszyk(this);
+        this.cennik = Cennik.pobierzCennik();
+        portfel = new Portfel(budzet);
     }
 
     ListaZyczen listaZyczen = new ListaZyczen(this);
@@ -25,6 +35,7 @@ public class Klient {
     public ListaZyczen pobierzListeZyczen() {
         return listaZyczen;
     }
+
 
     public String getNazwaKlienta() {
         return nazwaKlienta;
@@ -41,4 +52,14 @@ public class Klient {
     public boolean czyAbonamentowy() {
         return abonament;
     }
+
+    public void zaplac(SposobPlatnosci sposob) {
+        portfel.zaplac(sposob, koszyk);
+
+    }
+
+    public Portfel pobierzPortfel() {
+        return portfel;
+    }
+
 }

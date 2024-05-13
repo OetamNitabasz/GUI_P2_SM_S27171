@@ -60,15 +60,5 @@ public class Cennik {
 
         pozycje.add(cena);
     }
-   /* public Cennik getCennik() {
-        return (Cennik) pozycje.stream()
-                 .collect(Collectors.toList());
-    }
-    */
-    /*public List<Cena> ceny() {
-        return pozycje.stream()
-                .collect(Collectors.toList());
-    }
-     */
     // cennik mozna modyfikowac w dowolnym momemncie
 }

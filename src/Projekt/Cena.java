@@ -4,12 +4,12 @@ package Projekt;
 public class Cena {
     int rodzaj;
     public String nazwa;
-    double cenaZAbonamentem = -1;
-    double cenaPrzedProgiem = -1;
-    double cenaZaProgiem = -1;
-    double cenaStala = -1;
-    int progKilometrow = -1;
-    boolean darmowy = false;
+    public double cenaZAbonamentem = -1;
+    public double cenaPrzedProgiem = -1;
+    public double cenaZaProgiem = -1;
+    public double cenaStala = -1;
+    public int progKilometrow = -1;
+    public boolean darmowy = false;
 
 
 

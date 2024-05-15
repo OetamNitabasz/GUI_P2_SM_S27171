@@ -12,7 +12,6 @@ public class Cena {
     public boolean darmowy = false;
 
 
-
     public Cena(int rodzaj, String nazwa, double cenaZAbonamentem, double cenaPrzedProgiem,
                 double cenaZaProgiem, int progKilometrow) {
         this(rodzaj, nazwa);

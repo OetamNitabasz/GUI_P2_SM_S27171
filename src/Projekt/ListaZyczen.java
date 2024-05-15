@@ -37,14 +37,16 @@ public class ListaZyczen {
     }
 
 
-
     public String toString() {
         var wynik = new StringBuilder();
         wynik.append(klient.getNazwaKlienta()).append(": ");
+        if(lista.isEmpty()) {
+            wynik.append("-- pusto");
+        }
         for(Samochod samochod : lista) {
             wynik.append("\n").append(samochod);
-
         }
+
         return wynik.append("\n").toString();
     }
 }

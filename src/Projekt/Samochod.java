@@ -10,6 +10,7 @@ abstract class Samochod {
         this.dystans = dystans;
         this.nazwaSamochodu = nazwaSamochodu;
         this.rodzaj = rodzaj;
+
     }
 
     public int getRodzaj() {

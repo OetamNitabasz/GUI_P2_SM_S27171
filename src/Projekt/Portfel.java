@@ -2,29 +2,36 @@ package Projekt;
 
 public class Portfel {
     double budzet;
+    boolean zaplacone = false;
+
 
     public Portfel(double budzet) {
         this.budzet = budzet;
     }
+
     //budzet na czesc kwoty do zaplaty
-    //przerwac petle jak budzet = 0
+    //przerwac petle jezeli juz zostalo zaplacone
     //czesc kwoty, zaplac tyle ile mozesz za dane auto
     //czy mozna zmodyfikowac koszyk w forEach
     public void zaplac(SposobPlatnosci sposob, Koszyk koszyk) {
-        if(budzet <= 0) {
+        if (budzet <= 0) {
             return;
         }
-        for (Samochod s : koszyk.getZawartosc()) {
+        var zamowienie = koszyk.getZawartosc();
+        if (koszyk.sumaKoszyka() > budzet) {
+            zamowienie.sort((o1, o2) ->
+                    o1.getKoszt().sredniKosztKM().compareTo(o2.getKoszt().sredniKosztKM()));
+        }
+
+        for (Samochod s : zamowienie) {
             var koszt = s.getKoszt();
-            var kwotaDoZaplaty = sposob == SposobPlatnosci.KARTA
-                    ? koszt.getCena() * 1.01
-                    : koszt.getCena();
-            if(budzet >= kwotaDoZaplaty) {
-                budzet -= kwotaDoZaplaty;
-                koszt.zaplacone();
-            }
+            budzet = koszt.zaplac(budzet, sposob);
+            if (budzet <= 0)
+                break;
         }
     }
+
+    //public
 
     public String toString() {
         var wynik = String.format("%.2f", budzet);

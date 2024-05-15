@@ -55,11 +55,18 @@ public class Klient {
 
     public void zaplac(SposobPlatnosci sposob) {
         portfel.zaplac(sposob, koszyk);
-
     }
 
     public Portfel pobierzPortfel() {
         return portfel;
+    }
+
+    public void zwroc(int typ, String nazwa, int km) {
+        koszyk.getZawartosc()
+                .stream()
+                .filter(s -> s.getNazwaSamochodu().equals(nazwa) && s.getRodzaj() == typ)
+                .findFirst()
+                .ifPresent(s -> s.getKoszt().zwroc(km, portfel));
     }
 
 }

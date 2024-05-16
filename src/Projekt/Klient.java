@@ -62,11 +62,21 @@ public class Klient {
     }
 
     public void zwroc(int typ, String nazwa, int km) {
-        koszyk.getZawartosc()
+        /*koszyk.getZawartosc()
                 .stream()
                 .filter(s -> s.getNazwaSamochodu().equals(nazwa) && s.getRodzaj() == typ)
                 .findFirst()
-                .ifPresent(s -> s.getKoszt().zwroc(km, portfel));
+                .ifPresent(s -> s.getKoszt().zwroc(km, portfel));*/
+        var lista = koszyk.getZawartosc();
+        for(int i = 0; i < lista.size(); i++) {
+            var s = lista.get(i);
+            if(s.getNazwaSamochodu().equals(nazwa) && s.getRodzaj() == typ) {
+                s.getKoszt().zwroc(km, portfel);
+                lista.remove(i);
+                lista.add(s);
+                break;
+            }
+        }
     }
 
 }

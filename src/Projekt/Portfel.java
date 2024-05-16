@@ -1,12 +1,16 @@
 package Projekt;
 
 public class Portfel {
-    double budzet;
-    boolean zaplacone = false;
+    private double budzet;
+    private boolean zaplacone = false;
 
 
     public Portfel(double budzet) {
         this.budzet = budzet;
+    }
+
+    public void przyjmij(double kwota) {
+        budzet += kwota;
     }
 
     //budzet na czesc kwoty do zaplaty
@@ -30,8 +34,6 @@ public class Portfel {
                 break;
         }
     }
-
-    //public
 
     public String toString() {
         var wynik = String.format("%.2f", budzet);

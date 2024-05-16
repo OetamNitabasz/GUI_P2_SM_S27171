@@ -66,6 +66,7 @@ public class CarshareTest {
         System.out.println("Po zapłaceniu, koszyk klienta " + f1.pobierzKoszyk());
         System.out.println("Po zapłaceniu, koszyk klienta " + koszykF1);
 
+
         // Teraz przychodzi klient dakar,
         // deklaruje 850 zł na zamówienia
         Klient dakar = new Klient("dakar", 850, false);

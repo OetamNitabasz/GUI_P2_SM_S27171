@@ -1,7 +1,5 @@
 package Projekt;
 
-import java.util.ArrayList;
-import java.util.List;
 
 enum SposobPlatnosci {
     KARTA,
@@ -12,7 +10,6 @@ public class Klient {
     private String nazwaKlienta;
     private boolean abonament;
     private Koszyk koszyk;
-    private Cennik cennik;
     private Portfel portfel;
 
 
@@ -20,7 +17,6 @@ public class Klient {
         this.nazwaKlienta = nazwaKlienta;
         this.abonament = abonament;
         koszyk = new Koszyk(this);
-        this.cennik = Cennik.pobierzCennik();
         portfel = new Portfel(budzet);
     }
 
@@ -28,8 +24,8 @@ public class Klient {
 
 
     public void dodaj(Samochod samochod) {
+        ustalKoszt(samochod);
         listaZyczen.dodaj(samochod);
-        // nie dodawac dwa razy tych samych samochodow?
     }
 
     public ListaZyczen pobierzListeZyczen() {
@@ -46,9 +42,29 @@ public class Klient {
     }
 
     public Koszyk przepakuj() {
-        koszyk.przepakuj(listaZyczen);
+        var zawartosc = listaZyczen.getListaZyczen();
+        koszyk.wyczysc();
+        zawartosc.stream()
+                .forEach(s -> {
+                    ustalKoszt(s);
+                    if(s.getKoszt() != null)
+                        koszyk.dodaj(s);
+                });
+        zawartosc.removeIf(s -> s.getKoszt() != null);
         return koszyk;
     }
+
+    private void ustalKoszt(Samochod samochod) {
+        var cennik = Cennik.pobierzCennik();
+        var cena = cennik.cena(samochod);
+        if(cena == null) {
+            samochod.setKoszt(null);
+            return;
+        }
+        var koszt = cena.kosztPrzejazdu(czyAbonamentowy(), samochod.getDystans());
+        samochod.setKoszt(koszt);
+    }
+
     public boolean czyAbonamentowy() {
         return abonament;
     }
@@ -78,5 +94,4 @@ public class Klient {
             }
         }
     }
-
 }

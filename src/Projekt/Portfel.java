@@ -2,8 +2,6 @@ package Projekt;
 
 public class Portfel {
     private double budzet;
-    private boolean zaplacone = false;
-
 
     public Portfel(double budzet) {
         this.budzet = budzet;
@@ -13,10 +11,6 @@ public class Portfel {
         budzet += kwota;
     }
 
-    //budzet na czesc kwoty do zaplaty
-    //przerwac petle jezeli juz zostalo zaplacone
-    //czesc kwoty, zaplac tyle ile mozesz za dane auto
-    //czy mozna zmodyfikowac koszyk w forEach
     public void zaplac(SposobPlatnosci sposob, Koszyk koszyk) {
         if (budzet <= 0) {
             return;

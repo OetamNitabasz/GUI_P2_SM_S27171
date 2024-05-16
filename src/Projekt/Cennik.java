@@ -1,9 +1,7 @@
 package Projekt;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 public class Cennik {
 
@@ -37,9 +35,7 @@ public class Cennik {
         dodaj(new Cena(rodzaj, nazwa, cena));
     }
     public void dodaj(int rodzaj, String nazwa, double cenaZaProgiem, double cenaPrzedProgiem, int progKilometrow) {
-        // czemu robimy konstruktory a nie metodami zmieniamy cene
         dodaj(new Cena(rodzaj, nazwa, cenaPrzedProgiem, cenaZaProgiem, progKilometrow));
-
     }
 
     public void dodaj(int rodzaj, String nazwa, double cenaZAbonamentem, double cenaPrzedProgiem,

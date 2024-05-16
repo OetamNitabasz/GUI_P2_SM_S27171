@@ -1,11 +1,7 @@
 package Projekt;
 
-import java.sql.ClientInfoStatus;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedMap;
-import java.util.stream.Collectors;
 
 public class Koszyk {
 
@@ -16,16 +12,12 @@ public class Koszyk {
         this.klient = klient;
     }
 
-
-    public void przepakuj(ListaZyczen listaZyczen) {
+    public void wyczysc() {
         koszyk.clear();
-        listaZyczen.getListaZyczen()
-                .stream()
-                .filter(s -> s.getKoszt() != null)
-                .forEach(s -> koszyk.add(s));
-        //System.out.println(koszyk.size());
-        listaZyczen.getListaZyczen()
-                .removeIf(s -> s.getKoszt() != null);
+    }
+
+    public void dodaj(Samochod samochod) {
+        koszyk.add(samochod);
     }
 
     public double sumaKoszyka() {
@@ -35,38 +27,21 @@ public class Koszyk {
         return suma;
     }
 
-    /*var suma = koszyk.stream()
-            .map(s -> s.getKoszt().getCena())
-            .reduce(0.0, Double::sum);*/
-
-   /* public void wyczysc() {
-        koszyk.removeIf(s -> s.getKoszt().nieoplaconyDystans() <= 0);
-    }*/
-
     public List<Samochod> getZawartosc() {
         return koszyk;
     }
-
-
-    /*
-    for (Samochod s : listaZyczen.getListaZyczen()) {
-            if(cennik.cena(s) != null)
-                koszyk.add(s);
-        }
-     */
-
 
     public String toString() {
         var wynik = new StringBuilder();
         wynik.append(klient.getNazwaKlienta()).append(": ");
         boolean pusto = true;
         for (Samochod samochod : koszyk) {
-            if(samochod.getKoszt().nieoplaconyDystans() > 0) {
+            if (samochod.getKoszt().nieoplaconyDystans() > 0) {
                 wynik.append("\n").append(samochod);
                 pusto = false;
             }
         }
-        if(pusto) {
+        if (pusto) {
             wynik.append("-- pusto");
         }
         return wynik.append("\n").toString();

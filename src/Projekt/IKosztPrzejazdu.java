@@ -46,7 +46,6 @@ class KosztPrzejazdu implements IKosztPrzejazdu {
             wartosc += (dystans - progKilometrow) * cenaZaProgiem;
         }
         return wartosc;
-        //zoptyamiluzj kod
     }
 
     private boolean jestProgKm() {
@@ -116,7 +115,6 @@ class KosztPrzejazdu implements IKosztPrzejazdu {
         return dystans - zaplaconyDystans;
     }
 
-    /*public void*/
 
     public String toString() {
         var wynik = new StringBuilder();
@@ -126,7 +124,6 @@ class KosztPrzejazdu implements IKosztPrzejazdu {
                     .append(progKilometrow + 1).append(")");
         }
         return wynik.toString();
-        //dopracowac formatowanie double (dwa miejsca po przecinku)
     }
 
 

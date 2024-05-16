@@ -1,8 +1,5 @@
 package Projekt;
 
-//1. lublin null. Ma wypisac dystans i cena
-//2. Wyliczyc koszt w Cena.
-//3. Koszt odpowiednio wypisac.
 import static Projekt.SposobPlatnosci.*;
 
 public class CarshareTest {
@@ -13,7 +10,7 @@ public class CarshareTest {
     static double cena(Koszyk k, String markaSamochodu){
        var wartosc = k.getZawartosc()
                 .stream()
-                .filter(s -> s.getNazwaSamochodu() == markaSamochodu)
+                .filter(s -> s.getNazwaSamochodu().equals(markaSamochodu))
                 .map(s -> s.getKoszt().getCena())
                 .reduce(0.0, Double::sum);
        return wartosc;

@@ -7,43 +7,25 @@ public class ListaZyczen {
     private List<Samochod> lista = new ArrayList<>();
     private Klient klient;
 
-
     public ListaZyczen(Klient klient) {
         this.klient = klient;
     }
 
-    /*public void przepakuj(Koszyk koszyk) {
-        lista.stream()
-                .filter(s -> s.getKoszt() != null)
-                .forEach(s -> koszyk.);
-    }
-     */
-
-
     void dodaj(Samochod samochod) {
         lista.add(samochod);
-        var cennik = Cennik.pobierzCennik();
-        var cena = cennik.cena(samochod);
-        if(cena == null) {
-            return;
-        }
-       var koszt = cena.kosztPrzejazdu(klient.czyAbonamentowy(), samochod.getDystans());
-        samochod.setKoszt(koszt);
-
     }
 
     public List<Samochod> getListaZyczen() {
         return lista;
     }
 
-
     public String toString() {
         var wynik = new StringBuilder();
         wynik.append(klient.getNazwaKlienta()).append(": ");
-        if(lista.isEmpty()) {
+        if (lista.isEmpty()) {
             wynik.append("-- pusto");
         }
-        for(Samochod samochod : lista) {
+        for (Samochod samochod : lista) {
             wynik.append("\n").append(samochod);
         }
 
